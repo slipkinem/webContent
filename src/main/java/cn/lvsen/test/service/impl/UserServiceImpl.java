@@ -6,6 +6,8 @@ import cn.lvsen.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * Created by slipkinem on 2017/4/1.
  */
@@ -13,9 +15,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
-
+    @Override
     public User getUserById(String userId) {
         return userMapper.selectByPrimaryKey(userId);
     }

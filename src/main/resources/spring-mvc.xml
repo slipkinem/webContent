@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+  <!--扫描包，查@Controller注解-->
+  <context:component-scan base-package="cn.lvsen.test.controller"/>
+
+  <!--sprimg-webmvc 解析json 避免IE ajax 下载json文件-->
+  <!--<bean id="mappingJacksonHttpMessageConverter"-->
+        <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+    <!--<property name="supportedMediaTypes">-->
+      <!--<list>-->
+        <!--<value>text/html;charset=UTF-8</value>-->
+      <!--</list>-->
+    <!--</property>-->
+  <!--</bean>-->
+
+  <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+</beans>
