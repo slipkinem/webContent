@@ -12,9 +12,9 @@
 
   <context id="default" targetRuntime="MyBatis3">
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                    connectionURL="jdbc:mysql://localhost:3306/slipkinem"
-                    userId="slipkinem"
-                    password="123456"/>
+                    connectionURL="jdbc:mysql://localhost:3306/***"
+                    userId="***"
+                    password="***"/>
 
     <javaModelGenerator targetPackage="cn.lvsen.test.model" targetProject="src/main/java">
     </javaModelGenerator>
