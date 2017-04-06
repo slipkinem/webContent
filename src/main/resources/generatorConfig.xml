@@ -8,13 +8,13 @@
   <!--<properties resource="jdbc.properties"/>-->
 
   <classPathEntry
-      location="C:/Users/slipkinem/.m2/repository/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar" />
+      location="C:/Users/**/.m2/repository/mysql/mysql-connector-java/5.1.29/mysql-connector-java-5.1.29.jar" />
 
   <context id="default" targetRuntime="MyBatis3">
     <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                     connectionURL="jdbc:mysql://localhost:3306/vue_admin"
-                    userId="slipkinem"
-                    password="123456"/>
+                    userId="**"
+                    password="**"/>
 
     <javaModelGenerator targetPackage="cn.lvsen.test.model" targetProject="src/main/java">
     </javaModelGenerator>
