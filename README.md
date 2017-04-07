@@ -1,6 +1,7 @@
 # SSM整合流程
 ## spring spring-mvc mybatis maven
 ## web前端项目的源码[vue-admin](https://github.com/slipkinem/vue-admin)
+## 数据库的sql文件[vue_admin.sql](mind/vue_admin.sql)
 
 ### IDE idea
 1. File => new Project => maven => create from archetype => **maven-archetype-webapp**  
