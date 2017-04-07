@@ -10,30 +10,20 @@
   <!--扫描包，查注解-->
   <context:component-scan base-package="cn.lvsen.test"/>
 
-
-  <!--sprimg-webmvc 解析json 避免IE ajax 下载json文件-->
-  <!--<bean id="mappingJacksonHttpMessageConverter"-->
-  <!--class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-  <!--<property name="supportedMediaTypes">-->
-  <!--<list>-->
-  <!--<value>text/html;charset=UTF-8</value>-->
-  <!--</list>-->
-  <!--</property>-->
-  <!--</bean>-->
   <!--映射器与适配器，去掉@ResponseBody就会出问题-->
   <mvc:annotation-driven/>
-
+  <!-- 静态资源放置地 -->
   <mvc:resources mapping="/**" location="static" />
   <!--<mvc:resources mapping="/css/**" location="static" />-->
   <mvc:default-servlet-handler />
-
+  <!-- 拦截器 -->
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/api/**"/>
       <bean class="cn.lvsen.test.interceptor.AuthInterceptor"/>
     </mvc:interceptor>
   </mvc:interceptors>
-
+  <!-- 视图 -->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
         p:prefix="/" p:suffix=".html"/>
 </beans>
