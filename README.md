@@ -440,10 +440,10 @@ public class UserController {
     }
 ```
 
-11. 一个接口写好，然后配置启动项目  
-  1.![3](mind/3.png)
-  2.![3](mind/4.png)
-  3.![3](mind/5.png)
+11. 一个接口写好，然后配置服务器启动项目  
+  1.![3](mind/3.png)  
+  2.![3](mind/4.png)  
+  3.![3](mind/5.png)  
   然后点击**apply** => **OK**  
 项目启动，打开地址栏，追加输入**api/user/hello**，拿到数据OK，后台走通
 
