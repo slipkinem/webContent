@@ -9,6 +9,7 @@
 2. 一直点击next直到finished，maven会自动创建一个项目目录  
 ![2](https://github.com/slipkinem/webContent/blob/master/mind/2.png)
   * 最终项目目录结构图  
+```$xslt
   ├─src  
   │  └─main  
   │      ├─java  
@@ -45,8 +46,8 @@
   │      │                          UserServiceImpl.java  
   │      │                          
   │      ├─resources  
-  │      │  │  generatorConfig.xml  
-  │      │  │  jdbc.properties  
+  │      │  │     generatorConfig.xml  
+  │      │  │     jdbc.properties  
   │      │  └─spring  
   │      │          spring-mvc.xml  
   │      │          spring-mybatis.xml  
@@ -77,6 +78,7 @@
   │                  
   └─test  
           TestHello.java  
+```
 3. 在创建的POM里面添加依赖  
     pom.xml
 ```
