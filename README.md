@@ -8,6 +8,75 @@
 ![界面预览](https://github.com/slipkinem/webContent/blob/master/mind/1.png)
 2. 一直点击next直到finished，maven会自动创建一个项目目录  
 ![2](https://github.com/slipkinem/webContent/blob/master/mind/2.png)
+  * 最终项目目录结构图  
+  ├─src  
+  │  └─main  
+  │      ├─java  
+  │      │  └─cn  
+  │      │      └─lvsen  
+  │      │          └─test  
+  │      │              ├─controller  
+  │      │              │      TableController.java  
+  │      │              │      UserController.java  
+  │      │              │      
+  │      │              ├─dao  
+  │      │              │      TableDataMapper.java  
+  │      │              │      UserMapper.java  
+  │      │              │      
+  │      │              ├─interceptor  
+  │      │              │      AuthInterceptor.java  
+  │      │              │      
+  │      │              ├─mapping  
+  │      │              │      TableDataMapper.xml  
+  │      │              │      UserMapper.xml  
+  │      │              │      
+  │      │              ├─model  
+  │      │              │      TableData.java  
+  │      │              │      TableDataExample.java  
+  │      │              │      User.java  
+  │      │              │      UserExample.java  
+  │      │              │      
+  │      │              └─service  
+  │      │                  │  TableService.java  
+  │      │                  │  UserService.java  
+  │      │                  │  
+  │      │                  └─impl  
+  │      │                          TableServiceImpl.java  
+  │      │                          UserServiceImpl.java  
+  │      │                          
+  │      ├─resources  
+  │      │  │  generatorConfig.xml  
+  │      │  │  jdbc.properties  
+  │      │  └─spring  
+  │      │          spring-mvc.xml  
+  │      │          spring-mybatis.xml  
+  │      │          
+  │      └─webapp  
+  │          │  index.html  
+  │          │  index.jsp  
+  │          │  
+  │          ├─static  
+  │          │  ├─css  
+  │          │  │      app.f3c8e005c2be0a746136766675898059.css  
+  │          │  │      app.f3c8e005c2be0a746136766675898059.css.gz  
+  │          │  │      
+  │          │  ├─fonts  
+  │          │  │      element-icons.b02bdc1.ttf  
+  │          │  │      
+  │          │  └─js  
+  │          │          0.105cd4667842b0092158.js  
+  │          │          1.3f78774435db7aa5de2a.js  
+  │          │          app.3ec6fa4bebfb1bb58a2b.js  
+  │          │          app.3ec6fa4bebfb1bb58a2b.js.gz  
+  │          │          manifest.b0bb778337a7d07c6313.js  
+  │          │          vendor.bbf93d5282d3216eb30e.js  
+  │          │          vendor.bbf93d5282d3216eb30e.js.gz  
+  │          │          
+  │          └─WEB-INF  
+  │                  web.xml  
+  │                  
+  └─test  
+          TestHello.java  
 3. 在创建的POM里面添加依赖  
     pom.xml
 ```
