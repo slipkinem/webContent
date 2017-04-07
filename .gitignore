@@ -20,3 +20,5 @@ hs_err_pid*
 /src/main/java/cn/lvsen/test/dao/
 /src/main/resources/generatorConfig.xml
 /src/main/resources/jdbc.properties
+/test/
+*.log

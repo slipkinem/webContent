@@ -7,8 +7,9 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-  <!--扫描包，查@Controller注解-->
-  <context:component-scan base-package="cn.lvsen.test.controller"/>
+  <!--扫描包，查注解-->
+  <context:component-scan base-package="cn.lvsen.test"/>
+
 
   <!--sprimg-webmvc 解析json 避免IE ajax 下载json文件-->
   <!--<bean id="mappingJacksonHttpMessageConverter"-->
@@ -19,9 +20,20 @@
   <!--</list>-->
   <!--</property>-->
   <!--</bean>-->
-<!--映射器与适配器，去掉@ResponseBody就会出问题-->
-  <mvc:annotation-driven />
+  <!--映射器与适配器，去掉@ResponseBody就会出问题-->
+  <mvc:annotation-driven/>
+
+  <mvc:resources mapping="/**" location="static" />
+  <!--<mvc:resources mapping="/css/**" location="static" />-->
+  <mvc:default-servlet-handler />
+
+  <mvc:interceptors>
+    <mvc:interceptor>
+      <mvc:mapping path="/api/**"/>
+      <bean class="cn.lvsen.test.interceptor.AuthInterceptor"/>
+    </mvc:interceptor>
+  </mvc:interceptors>
 
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+        p:prefix="/" p:suffix=".html"/>
 </beans>

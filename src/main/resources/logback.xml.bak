@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+  <contextName>vueAdmin</contextName>
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+  </appender>
+</configuration>

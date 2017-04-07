@@ -16,6 +16,7 @@ import java.util.List;
 /**
  * Created by slipkinem on 2017/4/5.
  */
+
 @Service
 public class TableServiceImpl implements TableService {
     private static final Logger logger = LoggerFactory.getLogger(TableServiceImpl.class);
@@ -30,5 +31,19 @@ public class TableServiceImpl implements TableService {
         PageInfo<TableData> page = new PageInfo<TableData>(list);
         logger.info("total=> " + page.getTotal());
         return list;
+    }
+
+    @Override
+    public Integer deleteTable(Integer id) {
+        Integer code = tabledataMapper.deleteByPrimaryKey(id);
+        logger.info("code=> " + code);
+        return code;
+    }
+
+    @Override
+    public Integer updateTable(TableData tableData) {
+        Integer code = tabledataMapper.updateByPrimaryKey(tableData);
+        logger.info("updateCode=> " + code);
+        return code;
     }
 }
