@@ -15,9 +15,6 @@ hs_err_pid*
 *.iml
 /out/
 /target/
-/src/main/java/cn/lvsen/test/model/
-/src/main/java/cn/lvsen/test/mapping/
-/src/main/java/cn/lvsen/test/dao/
 /src/main/resources/generatorConfig.xml
 /src/main/resources/jdbc.properties
 /test/
