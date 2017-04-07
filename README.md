@@ -412,5 +412,11 @@ public class UserController {
   然后点击**apply** => **OK**  
 项目启动，打开地址栏，追加输入**api/user/hello**，拿到数据OK，后台走通
 
-12. 
-  
+### 前端部分
+12. 后台暂时放置，开始写前端**[前端部分代码](https://github.com/slipkinem/vue-admin)**
+#### 前端框架用的VUE，UI框架用的饿了么开源的element_ui
+  * 总概况：vue+vue-router+vue-resource+vuex+element_ui
+13. **用npm下载vue-cli**
+  * 用vue-cli生成webpack项目骨架
+  * npm install 下载所有依赖
+14. 
