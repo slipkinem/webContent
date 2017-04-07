@@ -306,45 +306,10 @@ generatorConfig.xml
 7. spring-mybatis.xml配置时用了**jdbc.properties**这是为了方便管理连接  
     resources/jdbc.properties的配置
 ```
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <!--引入jdbc的配置文件-->
-  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="location" value="classpath:jdbc.properties" />
-  </bean>
-  <!--jdbc连接数据库基本配置-->
-  <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-    <property name="driverClassName" value="${jdbc.driver}" />
-    <property name="url" value="${jdbc.url}" />
-    <property name="username" value="${jdbc.username}" />
-    <property name="password" value="${jdbc.password}" />
-  </bean>
-  <!--spring和mybatis结合的配置-->
-  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-    <property name="dataSource" ref="dataSource" />
-    <property name="mapperLocations" value="classpath:cn/lvsen/test/mapping/*Mapper.xml" />
-    <!-- 分页插件 -->
-    <property name="plugins">
-      <array>
-        <bean class="com.github.pagehelper.PageInterceptor">
-          <!--少了这句话会导致空指针异常-->
-          <property name="properties">
-            <value></value>
-          </property>
-        </bean>
-      </array>
-    </property>
-  </bean>
-
-  <!--dao接口，sping会自动查找其中的类 dao ——> 数据访问层 dao映射的mapper，去掉启动报错-->
-  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="cn.lvsen.test.dao"/>
-    <!--对应上面id="sqlSessionFactory"-->
-    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-  </bean>
-</beans>
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/vue_admin?useUnicode=true&characterEncoding=UTF-8
+jdbc.username=**
+jdbc.password=**
 ```
 8. web.xml配置，web.xml是这个web项目的入口  
 ```
