@@ -5,9 +5,9 @@
 
 ### IDE idea
 1. File => new Project => maven => create from archetype => **maven-archetype-webapp**  
-![界面预览](mind/1.png)
+![界面预览](https://github.com/slipkinem/webContent/blob/master/mind/1.png)
 2. 一直点击next直到finished，maven会自动创建一个项目目录  
-![2](mind/2.png)
+![2](https://github.com/slipkinem/webContent/blob/master/mind/2.png)
 3. 在创建的POM里面添加依赖  
     pom.xml
 ```
@@ -406,9 +406,9 @@ public class UserController {
 ```
 
 11. 一个接口写好，然后配置服务器启动项目  
-  1.![3](mind/3.png)  
-  2.![3](mind/4.png)  
-  3.![3](mind/5.png)  
+  1.![3](https://github.com/slipkinem/webContent/blob/master/mind/3.png)  
+  2.![3](https://github.com/slipkinem/webContent/blob/master/mind/4.png)  
+  3.![3](https://github.com/slipkinem/webContent/blob/master/mind/5.png)  
   然后点击**apply** => **OK**  
 项目启动，打开地址栏，追加输入**api/user/hello**，拿到数据OK，后台走通
 
