@@ -2,6 +2,7 @@ package cn.lvsen.test.controller;
 
 import cn.lvsen.test.model.User;
 import cn.lvsen.test.service.UserService;
+import cn.lvsen.test.util.VerifyCodeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,7 +33,7 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
-    public Map login(@RequestBody User user, HttpSession httpSession) {
+    public Map login(@RequestBody User user, String captcha, HttpSession httpSession) {
         Map<String, Object> map = new HashMap<String, Object>();
         try {
             User existUser = userService.getUserByUserCode(user.getUserCode());
@@ -37,13 +41,21 @@ public class UserController {
 
             if (null != existUser) {
                 if (encodeUserPassword.equals(existUser.getPassword())) {
-                    httpSession.setAttribute("userCode", user.getUserCode());
-                    map.put("errorCode", 0);
-                    map.put("errorMessage", "登录成功");
+                    if (httpSession.getAttribute("rand").equals(captcha)) {
+                        httpSession.setAttribute("userCode", user.getUserCode());
+                        map.put("errorCode", 0);
+                        map.put("errorMessage", "登录成功");
+
+                    } else {
+                        map.put("errorCode", 1);
+                        map.put("errorMessage", "验证码错误");
+                    }
+
                 } else {
                     map.put("errorCode", 3);
                     map.put("errorMessage", "密码错误");
                 }
+
             } else {
                 map.put("errorCode", 7);
                 map.put("errorMessage", "用户不存在");
@@ -81,4 +93,19 @@ public class UserController {
 
         return map;
     }
+
+    @RequestMapping(value = "loginVerifyCode", method = RequestMethod.GET)
+    public void loginCaptch(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
+
+        response.setDateHeader("Expires", 0);
+        response.setContentType("image/jpeg");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("cache-control", "no-cache");
+
+        request.getSession().setAttribute("rand", verifyCode.toLowerCase());
+
+        VerifyCodeUtils.outputImage(200, 80, response.getOutputStream(), verifyCode);
+    }
+
 }

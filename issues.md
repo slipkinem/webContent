@@ -16,4 +16,9 @@
         </resources>
       </build>
     ```
-2. 
+2.  包命名及内容   
+  * po: mybatis生成java对象 Persistent Object
+  * dao: Data Access Object 自定义数据访问接口
+  * mapper: mybatis生成的数据访问接口
+  * model: 自定义java对象 model层
+  * vo Value Object用new关键字创建，由GC回收，业务上的数据传递
