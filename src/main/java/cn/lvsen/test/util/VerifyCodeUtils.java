@@ -15,14 +15,26 @@ import java.util.Random;
  * Created by slipkinem on 2017/4/10.
  */
 public class VerifyCodeUtils {
-    public static final String VERIFY_CODES = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+    // 验证码所用字符的集合
+    private static final String VERIFY_CODES = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
     private static Random random = new Random();
 
+    /**
+     * 生成验证码
+     * @param verifySize 验证码字符串个数
+     * @return 返回生成的验证码
+     */
     public static String generateVerifyCode(int verifySize) {
         return generateVerifyCode(verifySize, VERIFY_CODES);
     }
 
-    public static String generateVerifyCode(int verifySize, String sources) {
+    /**
+     * 生成验证码
+     * @param verifySize 大小
+     * @param sources 验证码的字符串集合
+     * @return 返回一个随机的size大小的验证码数字
+     */
+    private static String generateVerifyCode(int verifySize, String sources) {
         if (sources == null || sources.length() == 0) {
             sources = VERIFY_CODES;
         }
@@ -136,7 +148,8 @@ public class VerifyCodeUtils {
         for (int i = 0; i < verifySize; i++) {
             AffineTransform affineTransform = new AffineTransform();
 
-            affineTransform.setToRotation(Math.PI / 4 * rand.nextDouble() * (rand.nextBoolean() ? 1 : -1),
+            affineTransform.setToRotation(Math.PI / 4
+                            * rand.nextDouble() * (rand.nextBoolean() ? 1 : -1),
                     (w / verifySize) * i + fontSize / 2, h / 2);
 
             graphics2D.setTransform(affineTransform);
@@ -147,6 +160,12 @@ public class VerifyCodeUtils {
 
     }
 
+    /**
+     * 获取随机颜色值 RGB
+     * @param fc
+     * @param bc
+     * @return
+     */
     private static Color getRandColor(int fc, int bc) {
         if (fc > 255) fc = 255;
         if (bc > 255) bc = 255;
@@ -192,6 +211,7 @@ public class VerifyCodeUtils {
                     / (double) frames);
 
             graphics.copyArea(0, i, w1, 1, (int) d, 0);
+
             if (borderGap) {
                 graphics.setColor(color);
                 graphics.drawLine((int) d, i, 0, i);

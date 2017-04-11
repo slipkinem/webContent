@@ -31,6 +31,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 登录接口，点击登录
+     * @param user user类的数据通过requestBody传过来
+     * @param captcha 验证码，通过param传过来的，不想给user添加captcha的model
+     * @param httpSession session管理，设置userCode和获取captcha
+     * @return 给前端的值
+     */
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
     public Map login(@RequestBody User user, String captcha, HttpSession httpSession) {
@@ -68,6 +75,11 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 注册接口
+     * @param user 新增的user
+     * @return 返回一个json字符串
+     */
     @RequestMapping(value = "register", method = RequestMethod.POST)
     @ResponseBody
     public Map registerUser(@RequestBody User user) {
@@ -94,17 +106,23 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 前端获取验证码的接口
+     * @param request 获取session
+     * @param response 设置返回值
+     * @throws IOException response.getOutputStream出错会抛出IO异常
+     */
     @RequestMapping(value = "loginVerifyCode", method = RequestMethod.GET)
     public void loginCaptch(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
-
+        // 不要缓存
         response.setDateHeader("Expires", 0);
         response.setContentType("image/jpeg");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("cache-control", "no-cache");
 
         request.getSession().setAttribute("rand", verifyCode.toLowerCase());
-
+        // 发验证码
         VerifyCodeUtils.outputImage(200, 80, response.getOutputStream(), verifyCode);
     }
 
