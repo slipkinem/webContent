@@ -5,6 +5,7 @@ import cn.lvsen.test.model.User;
 import cn.lvsen.test.model.UserExample;
 import cn.lvsen.test.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;

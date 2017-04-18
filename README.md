@@ -1,3 +1,12 @@
+---
+title: java SSM和vue整合
+categories: 课外学习
+tags:
+  - java
+  - ssm
+  - javascript
+---
+
 # SSM整合流程
 ## spring spring-mvc mybatis maven
 ## web前端项目的源码[vue-admin](https://github.com/slipkinem/vue-admin)
@@ -9,6 +18,7 @@
 2. 一直点击next直到finished，maven会自动创建一个项目目录  
 ![2](https://github.com/slipkinem/webContent/blob/master/mind/2.png)
   * 最终项目目录结构图  
+<!-- more -->
 ```$xslt
 │  .gitignore
 │  pom.xml
