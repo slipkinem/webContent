@@ -15,7 +15,7 @@ hs_err_pid*
 *.iml
 /out/
 /target/
-/src/main/resources/generatorConfig.xml
-/src/main/resources/jdbc.properties
 /test/
 *.log
+/src/main/resources/myGeneratorConfig.xml
+/src/main/resources/my-jdbc.properties
