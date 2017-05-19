@@ -80,4 +80,19 @@ public class TableController {
         }
         return map;
     }
+
+    @RequestMapping("insertTableData")
+    @ResponseBody
+    public Map<String, Object> addDataTable(@RequestBody TableData tableData) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        try {
+            Integer code = tableService.addTable(tableData);
+            map.put("errorCode", code);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("errorCode", 1);
+            map.put("errorMessage", "服务器有误");
+        }
+        return map;
+    }
 }

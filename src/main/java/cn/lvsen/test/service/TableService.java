@@ -13,4 +13,5 @@ public interface TableService {
     Integer deleteTable(Integer id);
 
     Integer updateTable(TableData tableData);
+    Integer addTable(TableData tableData);
 }

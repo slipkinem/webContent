@@ -46,4 +46,11 @@ public class TableServiceImpl implements TableService {
         logger.info("updateCode=> " + code);
         return code;
     }
+
+    @Override
+    public Integer addTable(TableData tableData) {
+        Integer code = tabledataMapper.insert(tableData);
+        logger.info("insertTableCode=> " + code);
+        return code;
+    }
 }

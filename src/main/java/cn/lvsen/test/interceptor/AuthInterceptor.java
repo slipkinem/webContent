@@ -18,9 +18,10 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         String uri = httpServletRequest.getRequestURI();
+        String method = httpServletRequest.getMethod().toLowerCase();
         HttpSession httpSession = httpServletRequest.getSession();
 
-        if (uri.contains("login") || uri.contains("register")) return true;
+        if (uri.contains("login") || uri.contains("register") || !method.equals("post")) return true;
 
         logger.info("httpSession=> " + httpSession.getAttribute("userCode"));
 
