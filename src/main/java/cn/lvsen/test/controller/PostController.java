@@ -31,6 +31,7 @@ public class PostController {
     public Map<String, Object> getPostById(@PathVariable String postId) {
         Map<String, Object> map = new HashMap<String, Object>();
         logger.info(postId);
+        System.out.println(postId);
         try {
             map.put("errorMessage", "请求成功");
         } catch (Exception e) {
