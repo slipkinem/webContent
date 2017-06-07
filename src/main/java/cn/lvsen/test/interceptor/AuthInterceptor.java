@@ -21,12 +21,13 @@ public class AuthInterceptor implements HandlerInterceptor {
         String method = httpServletRequest.getMethod().toLowerCase();
         HttpSession httpSession = httpServletRequest.getSession();
 
-        if (uri.contains("login") || uri.contains("register") || !method.equals("post")) return true;
+        if (uri.contains("login") || uri.contains("register")) return true;
 
-        logger.info("httpSession=> " + httpSession.getAttribute("userCode"));
+        logger.info("httpSession=> " + httpSession.getAttribute("user"));
 
-        if (null == httpSession.getAttribute("userCode")) {
+        if (null == httpSession.getAttribute("user")) {
             httpServletResponse.sendError(406, "授权错误");
+            return false;
         }
 
         return true;

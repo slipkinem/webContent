@@ -1,4 +1,4 @@
-import cn.lvsen.test.dao.TableDataMapper;
+import cn.lvsen.test.mapper.TableDataMapper;
 import cn.lvsen.test.service.TableService;
 import org.junit.Test;
 import org.junit.runner.RunWith;

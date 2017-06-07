@@ -1,6 +1,6 @@
 package cn.lvsen.test.controller;
 
-import cn.lvsen.test.model.User;
+import cn.lvsen.test.po.User;
 import cn.lvsen.test.service.UserService;
 import cn.lvsen.test.util.VerifyCodeUtils;
 import org.slf4j.Logger;
@@ -49,7 +49,7 @@ public class UserController {
             if (null != existUser) {
                 if (encodeUserPassword.equals(existUser.getPassword())) {
                     if (httpSession.getAttribute("rand").equals(captcha)) {
-                        httpSession.setAttribute("userCode", user.getUserCode());
+                       httpSession.setAttribute("user", existUser);
                         map.put("errorCode", 0);
                         map.put("errorMessage", "登录成功");
 

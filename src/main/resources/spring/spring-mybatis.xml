@@ -16,7 +16,7 @@
   <!--spring和mybatis结合的配置-->
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
-    <property name="mapperLocations" value="classpath:cn/lvsen/test/mapping/*Mapper.xml" />
+    <property name="mapperLocations" value="classpath:cn/lvsen/test/mapper/*Mapper.xml" />
     <!-- 分页插件 -->
     <property name="plugins">
       <array>
@@ -32,7 +32,7 @@
 
   <!--dao接口，sping会自动查找其中的类 dao ——> 数据访问层 dao映射的mapper，去掉启动报错-->
   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    <property name="basePackage" value="cn.lvsen.test.dao"/>
+    <property name="basePackage" value="cn.lvsen.test.mapper"/>
     <!--对应上面id="sqlSessionFactory"-->
     <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
   </bean>

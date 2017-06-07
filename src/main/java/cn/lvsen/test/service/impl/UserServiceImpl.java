@@ -1,11 +1,12 @@
 package cn.lvsen.test.service.impl;
 
-import cn.lvsen.test.dao.UserMapper;
-import cn.lvsen.test.model.User;
-import cn.lvsen.test.model.UserExample;
+import cn.lvsen.test.mapper.UserMapper;
+import cn.lvsen.test.po.User;
+import cn.lvsen.test.po.UserExample;
 import cn.lvsen.test.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -20,6 +21,8 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -41,7 +44,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer insertUserRecord(User user) {
-        return userMapper.insert(user);
+        Integer code;
+        try {
+            code = userMapper.insertSelective(user);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            code = 9;
+        }
+        return code;
     }
 
     @Override
@@ -55,5 +65,17 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
         return userPassword;
+    }
+
+    @Override
+    public String getUserNameByUserId(Integer userId) {
+        String username = null;
+        try {
+            User user = userMapper.selectByPrimaryKey(userId);
+            username = user.getUsername();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return username;
     }
 }
