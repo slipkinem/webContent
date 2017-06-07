@@ -29,5 +29,6 @@
     <!-- 表的名字 -->
     <table tableName="t_table" domainObjectName="TableData"/>
     <table tableName="t_user" domainObjectName="User" />
+    <table tableName="t_comment" domainObjectName="Comment" />
   </context>
 </generatorConfiguration>

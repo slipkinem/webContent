@@ -1,6 +1,6 @@
 package cn.lvsen.test.controller;
 
-import cn.lvsen.test.model.TableData;
+import cn.lvsen.test.po.TableData;
 import cn.lvsen.test.service.TableService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +81,11 @@ public class TableController {
         return map;
     }
 
+    /**
+     * 插入一条数据
+     * @param tableData 数据
+     * @return result
+     */
     @RequestMapping("insertTableData")
     @ResponseBody
     public Map<String, Object> addDataTable(@RequestBody TableData tableData) {

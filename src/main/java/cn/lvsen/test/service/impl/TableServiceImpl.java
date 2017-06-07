@@ -1,8 +1,8 @@
 package cn.lvsen.test.service.impl;
 
-import cn.lvsen.test.dao.TableDataMapper;
-import cn.lvsen.test.model.TableData;
-import cn.lvsen.test.model.TableDataExample;
+import cn.lvsen.test.mapper.TableDataMapper;
+import cn.lvsen.test.po.TableData;
+import cn.lvsen.test.po.TableDataExample;
 import cn.lvsen.test.service.TableService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -49,7 +49,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Integer addTable(TableData tableData) {
-        Integer code = tabledataMapper.insert(tableData);
+        Integer code = tabledataMapper.insertSelective(tableData);
         logger.info("insertTableCode=> " + code);
         return code;
     }

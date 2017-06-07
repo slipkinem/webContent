@@ -1,6 +1,7 @@
 package cn.lvsen.test.service;
 
-import cn.lvsen.test.model.User;
+
+import cn.lvsen.test.po.User;
 
 /**
  * Created by slipkinem on 2017/4/6.
@@ -11,4 +12,6 @@ public interface UserService {
     Integer insertUserRecord(User user);
 
     String encryptUserPassword(String password);
+
+    String getUserNameByUserId(Integer userId);
 }

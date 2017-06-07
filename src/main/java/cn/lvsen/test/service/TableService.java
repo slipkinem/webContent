@@ -1,6 +1,7 @@
 package cn.lvsen.test.service;
 
-import cn.lvsen.test.model.TableData;
+
+import cn.lvsen.test.po.TableData;
 
 import java.util.List;
 
