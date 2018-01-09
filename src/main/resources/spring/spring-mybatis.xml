@@ -23,7 +23,7 @@
         <bean class="com.github.pagehelper.PageInterceptor">
           <!--少了这句话会导致空指针异常-->
           <property name="properties">
-            <value></value>
+            <value/>
           </property>
         </bean>
       </array>

@@ -19,7 +19,7 @@ import java.util.Map;
  * Created by slipkinem on 2017/4/5.
  */
 @Controller
-@RequestMapping("api/table")
+@RequestMapping("/table")
 public class TableController {
     private final static Logger logger = LoggerFactory.getLogger(TableController.class);
 

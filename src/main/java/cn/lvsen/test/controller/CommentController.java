@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by slipkinem on 5/23/2017.
  */
 @Controller
-@RequestMapping("api/comment")
+@RequestMapping("/comment")
 public class CommentController {
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
