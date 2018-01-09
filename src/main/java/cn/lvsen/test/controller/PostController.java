@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by slipkinem on 5/19/2017.
  */
-@RequestMapping("api/post")
+@RequestMapping("/post")
 @Controller
 public class PostController {
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
