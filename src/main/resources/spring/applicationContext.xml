@@ -23,7 +23,7 @@
   <!--spring和mybatis结合的配置-->
   <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
-    <property name="mapperLocations" value="classpath:cn/lvsen/test/mapper/*Mapper.xml" />
+    <property name="mapperLocations" value="classpath:top/slipkinem/admin/mapper/*Mapper.xml" />
     <!-- 分页插件 -->
     <property name="plugins">
       <array>
@@ -78,7 +78,7 @@
   </aop:config>
   <!-- shiro配置 -->
   <!-- 自定义的realm域 -->
-  <bean id="articleRealm" class="cn.lvsen.test.realm.myRealm" />
+  <bean id="articleRealm" class="top.slipkinem.admin.realm.myRealm" />
   <!-- shiro安全管理器 -->
   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
     <property name="realm" ref="articleRealm" />

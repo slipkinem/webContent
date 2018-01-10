@@ -20,7 +20,7 @@
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/api/**" />
-      <bean class="cn.lvsen.test.interceptor.AuthInterceptor" />
+      <bean class="top.slipkinem.admin.interceptor.AuthInterceptor" />
     </mvc:interceptor>
   </mvc:interceptors>
   <!-- 视图 -->

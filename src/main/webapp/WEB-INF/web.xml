@@ -116,7 +116,7 @@
 
   <!--<servlet>-->
     <!--<servlet-name>AuthImage</servlet-name>-->
-    <!--<servlet-class>cn.lvsen.test.util.AuthImage</servlet-class>-->
+    <!--<servlet-clAuthImagemage</servlet-class>-->
   <!--</servlet>-->
 
   <!--<servlet-mapping>-->

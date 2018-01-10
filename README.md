@@ -341,7 +341,7 @@ generatorConfig.xml
   <mvc:interceptors>
     <mvc:interceptor>
       <mvc:mapping path="/api/**"/>
-      <bean class="cn.lvsen.test.interceptor.AuthInterceptor"/>
+      <bean class="AuthInterceptor"/>
     </mvc:interceptor>
   </mvc:interceptors>
   <!-- 视图 -->
