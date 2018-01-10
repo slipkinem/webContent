@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,10 +27,16 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public List<TableData> getTableData(Integer current, Integer size) {
-        PageHelper.startPage(current, size);
-        List<TableData> list = tabledataMapper.selectByExample(new TableDataExample());
-        PageInfo<TableData> page = new PageInfo<TableData>(list);
-        logger.info("total=> " + page.getTotal());
+        List<TableData> list = new ArrayList<TableData>();
+        try {
+            PageHelper.startPage(current, size);
+            list = tabledataMapper.selectByExample(new TableDataExample());
+            PageInfo<TableData> page = new PageInfo<TableData>(list);
+            logger.info("total=> " + page.getTotal());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new Error("数据库查询失败");
+        }
         return list;
     }
 
