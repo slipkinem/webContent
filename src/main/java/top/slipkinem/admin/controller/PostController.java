@@ -1,16 +1,14 @@
 package top.slipkinem.admin.controller;
 
-import top.slipkinem.admin.po.Post;
-import top.slipkinem.admin.po.User;
-import top.slipkinem.admin.service.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import top.slipkinem.admin.po.Post;
+import top.slipkinem.admin.po.User;
+import top.slipkinem.admin.service.PostService;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +17,7 @@ import java.util.Map;
  * Created by slipkinem on 5/19/2017.
  */
 @RequestMapping("/post")
-@Controller
+@RestController
 public class PostController {
     private static final Logger logger = LoggerFactory.getLogger(PostController.class);
 
@@ -38,7 +36,7 @@ public class PostController {
     @ResponseBody
     public Map<String, Object> getPosts(Integer currentPage, Integer pageSize, HttpSession httpSession) {
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Post> list = new ArrayList<Post>();
+        List<Post> list;
         try {
             Integer userId = ((User) httpSession.getAttribute("user")).getUserId();
             list = postService.getPostsByUserId(userId);

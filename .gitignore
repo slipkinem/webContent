@@ -14,7 +14,7 @@ hs_err_pid*
 .idea/
 *.iml
 /out/
-/target/
+target/
 /test/
 *.log
 /src/main/resources/myGeneratorConfig.xml

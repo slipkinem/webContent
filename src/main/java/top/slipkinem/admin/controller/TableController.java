@@ -1,24 +1,21 @@
 package top.slipkinem.admin.controller;
 
-import top.slipkinem.admin.po.TableData;
-import top.slipkinem.admin.service.TableService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import top.slipkinem.admin.po.TableData;
+import top.slipkinem.admin.service.TableService;
+import top.slipkinem.common.beans.PageBean;
+import top.slipkinem.common.beans.ResultBean;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by slipkinem on 2017/4/5.
  */
-@Controller
+@RestController
 @RequestMapping("/table")
 public class TableController {
     private final static Logger logger = LoggerFactory.getLogger(TableController.class);
@@ -32,20 +29,9 @@ public class TableController {
      * @param size 页量
      * @return map
      */
-    @RequestMapping(value = "getTable", method = RequestMethod.GET)
-    @ResponseBody
-    public Map getTable(Integer current, Integer size) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        List<TableData> page = tableService.getTableData(current, size);
-
-        if (null != page) {
-            map.put("errorCode", 0);
-            map.put("data", page);
-        } else {
-            map.put("errorCode", 1);
-            map.put("errorMessage", "数据为空");
-        }
-        return map;
+    @GetMapping("/getTable")
+    public ResultBean<PageBean<TableData>> getTable(Integer current, Integer size) {
+        return new ResultBean<>(tableService.getTableData(current, size));
     }
 
 

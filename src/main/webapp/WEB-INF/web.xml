@@ -14,7 +14,9 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-      classpath:spring/applicationContext.xml
+      classpath:spring/applicationContext.xml,
+      classpath:spring/spring-mybatis.xml,
+      classpath:spring/spring-shiro.xml
     </param-value>
   </context-param>
 

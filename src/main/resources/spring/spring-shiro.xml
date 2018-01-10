@@ -2,4 +2,31 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!-- shiro配置 -->
+  <!-- 自定义的realm域 -->
+  <bean id="articleRealm" class="top.slipkinem.admin.realm.myRealm" />
+  <!-- shiro安全管理器 -->
+  <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <property name="realm" ref="articleRealm" />
+  </bean>
+  <!-- shiro过滤器 -->
+  <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    <!-- 核心安全管理器接口，必须 -->
+    <property name="securityManager" ref="securityManager" />
+    <!-- shiro过滤链的定义 -->
+    <property name="filterChainDefinitions">
+      <value>
+        /login=anon
+        /user/admin*=authc
+      </value>
+    </property>
+  </bean>
+  <!-- 保证实现了shiro内部lifecycle函数的bean执行 -->
+  <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+  <!-- 开启shiro注解 -->
+  <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
+  <!-- 开启spring注解 -->
+  <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+    <property name="securityManager" ref="securityManager" />
+  </bean>
 </beans>
