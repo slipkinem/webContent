@@ -1,17 +1,16 @@
 package top.slipkinem.admin.controller;
 
-import top.slipkinem.admin.po.Comment;
-import top.slipkinem.admin.po.User;
-import top.slipkinem.admin.service.CommentService;
-import top.slipkinem.admin.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import top.slipkinem.admin.po.Comment;
+import top.slipkinem.admin.po.User;
+import top.slipkinem.admin.service.CommentService;
+import top.slipkinem.admin.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,7 @@ public class CommentController {
      */
     @RequestMapping(value = "/{postId}", method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> getCommentsByPostId(@PathVariable Integer postId, HttpSession httpSession) {
+    public Map<String, Object> getCommentsByPostId(@PathVariable Integer postId) {
         Map<String, Object> map = new HashMap<String, Object>();
         logger.info("postId===>" + postId);
         try {

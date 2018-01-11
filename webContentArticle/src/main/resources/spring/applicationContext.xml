@@ -41,6 +41,19 @@
     </tx:attributes>
   </tx:advice>
 
+  <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basenames">
+      <list>
+        <value>exceptions</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+    <property name="staticMethod" value="top.slipkinem.common.utils.CheckUtil.setMessageSource"/>
+    <property name="arguments" ref="messageSource"/>
+  </bean>
+
   <bean id="controllerAop" class="top.slipkinem.common.aop.ControllerAop"/>
 
   <!-- 配置控制器切面 -->

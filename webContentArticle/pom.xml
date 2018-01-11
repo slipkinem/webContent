@@ -20,12 +20,6 @@
   </properties>
 
   <dependencies>
-    <!--spring-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
     <!-- jdbc连接池 -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -44,12 +38,7 @@
       <artifactId>spring-test</artifactId>
       <version>${spring.version}</version>
     </dependency>
-    <!-- 注解扫描 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+
     <!-- MVC -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -60,12 +49,6 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-aop</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context-support</artifactId>
       <version>${spring.version}</version>
     </dependency>
     <!-- mybatis和spring结合用 -->

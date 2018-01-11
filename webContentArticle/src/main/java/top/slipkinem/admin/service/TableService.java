@@ -10,8 +10,8 @@ import top.slipkinem.common.beans.PageBean;
 public interface TableService {
     PageBean<TableData> getTableData(Integer current, Integer pageSize);
 
-    Integer deleteTable(Integer id);
+    Boolean deleteTable(Integer id);
 
-    Integer updateTable(TableData tableData);
+    Boolean updateTable(TableData tableData);
     Integer addTable(TableData tableData);
 }

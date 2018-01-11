@@ -11,7 +11,6 @@ import top.slipkinem.common.excepitons.UnloginException;
 /**
  * Created by slipkinem on 1/10/2018.
  */
-
 public class ControllerAop {
     private static final Logger logger = LoggerFactory.getLogger(ControllerAop.class);
 
@@ -34,6 +33,8 @@ public class ControllerAop {
     private ResultBean<?> handlerException(ProceedingJoinPoint joinPoint, Throwable e) {
         ResultBean<?> result = new ResultBean();
 
+        logger.error(joinPoint.getSignature() + "error ", e);
+
         if (e instanceof CheckException || e instanceof IllegalArgumentException) {
             result.setErrorMessage(e.getLocalizedMessage());
             result.setErrorCode(ResultBean.CHECK_FAIL);
@@ -52,7 +53,6 @@ public class ControllerAop {
             return result;
         }
 
-        logger.error(joinPoint.getSignature() + "error ", e);
         result.setErrorMessage(e.toString());
         result.setErrorCode(ResultBean.UNKNOWN_EXCEPTION);
 
