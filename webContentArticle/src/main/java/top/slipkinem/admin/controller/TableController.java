@@ -22,7 +22,7 @@ public class TableController {
      * @param size 页量
      * @return map
      */
-    @GetMapping("/list")
+    @GetMapping
     public ResultBean<PageBean<TableData>> getTable(Integer current, Integer size) {
         return new ResultBean<>(tableService.getTableData(current, size));
     }
@@ -53,7 +53,7 @@ public class TableController {
      * @param tableData 数据
      * @return result
      */
-    @PostMapping("/add")
+    @PostMapping
     public ResultBean<Integer> addDataTable(@RequestBody TableData tableData) {
         return new ResultBean<>(tableService.addTable(tableData));
     }

@@ -27,8 +27,7 @@ public class TableServiceImpl implements TableService {
     @Override
     public PageBean<TableData> getTableData(Integer PageNum, Integer PageSize) {
         notNull(PageNum, "param.is.null");
-
-        check(PageSize > 100, "id.error", PageSize);
+        notNull(PageSize, "param.is.null");
 
         PageHelper.startPage(PageNum, PageSize);
         List<TableData> list = tabledataMapper.selectByExample(new TableDataExample());
