@@ -1,18 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>top.slipkinem.admin</groupId>
-  <artifactId>article</artifactId>
-  <packaging>war</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>article Maven Webapp</name>
-  <url>http://maven.apache.org</url>
 
-  <properties>
-    <spring.version>4.3.7.RELEASE</spring.version>
-    <shiro.version>1.2.5</shiro.version>
-    <jackson.version>2.8.7</jackson.version>
-  </properties>
+  <groupId>top.slipkinem.admin</groupId>
+  <artifactId>webContent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>webContentArticle</module>
+    <module>webContentCommon</module>
+  </modules>
 
   <dependencies>
     <!--测试-->
@@ -22,113 +21,12 @@
       <version>4.12</version>
       <scope>test</scope>
     </dependency>
-    <!--spring-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!-- jdbc连接池 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!-- 事务管理 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!--spring测试用-->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-test</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!-- 注解扫描 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!-- MVC -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!-- 切面，将日志记录，事务等分离开来 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-aop</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
 
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context-support</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <!-- mybatis和spring结合用 -->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis-spring</artifactId>
-      <version>1.2.4</version>
-    </dependency>
-    <!-- mysql连接驱动 -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>5.1.38</version>
-    </dependency>
-    <!-- 连接数据库 -->
-    <dependency>
-      <groupId>commons-dbcp</groupId>
-      <artifactId>commons-dbcp</artifactId>
-      <version>1.4</version>
-    </dependency>
-  <!-- mybatis -->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.3.1</version>
-    </dependency>
-    <!-- 转换json用 -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.7</version>
-    </dependency>
-    <!-- jackson转换json用 @ResponseBody默认调用jackson，将java对象转为json -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
     <!-- 分页插件 -->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
       <version>5.0.0</version>
-    </dependency>
-    <!-- javaHttp基础包 -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.1.0</version>
     </dependency>
     <!-- 日志 -->
     <dependency>
@@ -141,30 +39,6 @@
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>1.1.3</version>
-    </dependency>
-    <!-- shiro -->
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-core</artifactId>
-      <version>${shiro.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-web</artifactId>
-      <version>${shiro.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-ehcache</artifactId>
-      <version>${shiro.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.shiro</groupId>
-      <artifactId>shiro-spring</artifactId>
-      <version>${shiro.version}</version>
     </dependency>
     <!-- spring-aop切面依赖包，spring-aop是以此包为基础的 -->
     <dependency>
@@ -179,51 +53,6 @@
       <artifactId>lombok</artifactId>
       <version>RELEASE</version>
     </dependency>
-
-    <!--<dependency>-->
-      <!--<groupId>top.slipkinem.common</groupId>-->
-      <!--<artifactId>webContent-common</artifactId>-->
-      <!--<version>1.0-SNAPSHOT</version>-->
-    <!--</dependency>-->
   </dependencies>
 
-
-  <build>
-    <finalName>article</finalName>
-    <!-- 防止package打包不到XML-->
-    <resources>
-      <resource>
-        <directory>src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-        </includes>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
-
-    <plugins>
-      <!-- mybatis生成代码插件 -->
-      <plugin>
-        <groupId>org.mybatis.generator</groupId>
-        <artifactId>mybatis-generator-maven-plugin</artifactId>
-        <version>1.3.5</version>
-        <configuration>
-          <!-- 生成文件的配置 -->
-          <configurationFile>src/main/resources/myGeneratorConfig.xml</configurationFile>
-          <verbose>true</verbose>
-          <overwrite>true</overwrite>
-        </configuration>
-      </plugin>
-      <plugin>
-        <!-- maven插件 -->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-
-  </build>
 </project>
