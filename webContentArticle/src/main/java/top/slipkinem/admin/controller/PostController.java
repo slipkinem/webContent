@@ -34,7 +34,7 @@ public class PostController {
     @GetMapping
     public ResultBean<PageBean<Post>> getPosts(Integer pageNum, Integer pageSize, HttpSession httpSession) {
         Integer userId = ((User)httpSession.getAttribute("user")).getUserId();
-        return new ResultBean<>(postService.getPostsByUserId(userId, pageNum, pageNum));
+        return new ResultBean<>(postService.getPostsByUserId(userId, pageNum, pageSize));
     }
 
     /**
