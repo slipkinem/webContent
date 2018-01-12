@@ -24,7 +24,6 @@ import static top.slipkinem.common.utils.CheckUtil.notNull;
  */
 @Service
 public class PostServiceImpl implements PostService {
-    private static final Logger logger = LoggerFactory.getLogger(PostService.class);
     @Autowired
     private PostMapper postMapper;
 
