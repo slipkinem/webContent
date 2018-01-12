@@ -1,16 +1,17 @@
 package top.slipkinem.admin.service.impl;
 
-import top.slipkinem.admin.mapper.CommentMapper;
-import top.slipkinem.admin.po.Comment;
-import top.slipkinem.admin.po.CommentExample;
-import top.slipkinem.admin.service.CommentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.slipkinem.admin.mapper.CommentMapper;
+import top.slipkinem.admin.po.Comment;
+import top.slipkinem.admin.po.CommentExample;
+import top.slipkinem.admin.service.CommentService;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static top.slipkinem.common.utils.CheckUtil.notNull;
 
 /**
  * Created by slipkinem on 5/24/2017.
@@ -23,33 +24,22 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<Comment> getCommentsByPostId(Integer postId) {
-        List<Comment> comments = new ArrayList<Comment>();
+        notNull(postId, "param.is.null");
+        List<Comment> comments;
         CommentExample commentExample = new CommentExample();
-        try {
-            commentExample
-                    // 生成一个sql条件语句实例
-                    .createCriteria()
-                    // 给选择条件里面添加一个postId
-                    .andPostIdEqualTo(postId);
-            comments = commentMapper.selectByExampleWithBLOBs(commentExample);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-        }
+
+        commentExample
+                // 生成一个sql条件语句实例
+                .createCriteria()
+                // 给选择条件里面添加一个postId
+                .andPostIdEqualTo(postId);
+        comments = commentMapper.selectByExampleWithBLOBs(commentExample);
+
         return comments;
     }
 
     @Override
-    public Integer insertComment(Comment comment) {
-        Integer code;
-        try {
-            // insert没有值的数据会用null填充
-            // insertSelective 只会添加有数据的字段，不会覆盖默认值
-           code = commentMapper.insertSelective(comment);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            code = 9;
-        }
-        return code;
+    public Boolean insertComment(Comment comment) {
+        return commentMapper.insertSelective(comment) > 0;
     }
 }

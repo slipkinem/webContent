@@ -20,19 +20,19 @@
   </bean>
 
   <!-- 配置事务通知属性 -->
-  <tx:advice id="txAdvice" transaction-manager="transactionManager">
+  <tx:advice id="txAdvice">
     <!-- 定义事务传播属性 -->
     <tx:attributes>
-      <tx:method name="save*" propagation="REQUIRED"/>
-      <tx:method name="add*" propagation="REQUIRED"/>
-      <tx:method name="delete*" propagation="REQUIRED"/>
-      <tx:method name="change*" propagation="REQUIRED"/>
-      <tx:method name="update*" propagation="REQUIRED"/>
-      <tx:method name="insert*" propagation="REQUIRED"/>
-      <tx:method name="adjust*" propagation="REQUIRED"/>
-      <tx:method name="create*" propagation="REQUIRED"/>
-      <tx:method name="lock*" propagation="REQUIRED"/>
-      <tx:method name="unlock*" propagation="REQUIRED"/>
+      <tx:method name="save*"/>
+      <tx:method name="add*"/>
+      <tx:method name="delete*"/>
+      <tx:method name="change*"/>
+      <tx:method name="update*"/>
+      <tx:method name="insert*"/>
+      <tx:method name="adjust*"/>
+      <tx:method name="create*"/>
+      <tx:method name="lock*"/>
+      <tx:method name="unlock*"/>
       <tx:method name="get*" propagation="SUPPORTS"/>
       <tx:method name="query*" propagation="SUPPORTS"/>
       <tx:method name="find*" propagation="SUPPORTS"/>

@@ -10,5 +10,5 @@ import java.util.List;
 public interface CommentService {
     List<Comment> getCommentsByPostId(Integer postId);
 
-    Integer insertComment(Comment comment);
+    Boolean insertComment(Comment comment);
 }

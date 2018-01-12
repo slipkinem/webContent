@@ -1,5 +1,8 @@
 package top.slipkinem.admin.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import top.slipkinem.admin.po.User;
@@ -35,8 +38,11 @@ public class UserController {
     @PostMapping("login")
     public ResultBean<User> login(@RequestBody User user, String captcha, HttpSession httpSession) {
         check(httpSession.getAttribute("rand").equals(captcha), "captcha.error");
+        Subject subject = SecurityUtils.getSubject();
         User existUser = userService.login(user);
-        httpSession.setAttribute("user", existUser);
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserCode(), user.getPassword());
+        token.setRememberMe(true);
+        subject.login(token);
         return new ResultBean<>(existUser);
     }
 
