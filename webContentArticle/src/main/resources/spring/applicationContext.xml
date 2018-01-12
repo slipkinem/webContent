@@ -59,6 +59,7 @@
   <!-- 配置控制器切面 -->
   <aop:config>
     <aop:aspect id="topAop" ref="controllerAop">
+      <!-- 给返回值为ResultBean的public方法设置切点 -->
       <aop:pointcut id="target" expression="execution(public top.slipkinem.common.beans.ResultBean *(..))"/>
       <aop:around method="handlerControllerMethod" pointcut-ref="target"/>
     </aop:aspect>

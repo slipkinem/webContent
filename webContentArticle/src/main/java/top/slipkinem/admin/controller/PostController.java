@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.*;
 import top.slipkinem.admin.po.Post;
 import top.slipkinem.admin.po.User;
 import top.slipkinem.admin.service.PostService;
+import top.slipkinem.common.beans.PageBean;
+import top.slipkinem.common.beans.ResultBean;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by slipkinem on 5/19/2017.
@@ -27,28 +26,15 @@ public class PostController {
     /**
      * 获取登录用户全部文章
      *
-     * @param currentPage 页码
+     * @param pageNum 页码
      * @param pageSize    数据量
      * @param httpSession session
      * @return map
      */
-    @RequestMapping(value = "/all", method = RequestMethod.GET)
-    @ResponseBody
-    public Map<String, Object> getPosts(Integer currentPage, Integer pageSize, HttpSession httpSession) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        List<Post> list;
-        try {
-            Integer userId = ((User) httpSession.getAttribute("user")).getUserId();
-            list = postService.getPostsByUserId(userId);
-            map.put("posts", list);
-            map.put("errorMessage", "查询成功");
-            map.put("errorCode", 0);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            map.put("errorMessage", e.getMessage());
-            map.put("errorCode", 9);
-        }
-        return map;
+    @GetMapping
+    public ResultBean<PageBean<Post>> getPosts(Integer pageNum, Integer pageSize, HttpSession httpSession) {
+        Integer userId = ((User)httpSession.getAttribute("user")).getUserId();
+        return new ResultBean<>(postService.getPostsByUserId(userId, pageNum, pageNum));
     }
 
     /**
@@ -57,23 +43,9 @@ public class PostController {
      * @param postId postId
      * @return map
      */
-    @RequestMapping(value = "/{postId}", method = RequestMethod.GET)
-    @ResponseBody
-    public Map<String, Object> getPostById(@PathVariable Integer postId) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        logger.info(String.valueOf(postId));
-        try {
-            Post post = postService.getPostByPostId(postId);
-            map.put("errorMessage", "请求成功");
-            map.put("errorCode", 0);
-            map.put("post", post);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
-            map.put("errorCode", 9);
-            map.put("errorMessage", e.getMessage());
-        }
-        return map;
+    @GetMapping("/{postId}")
+    public ResultBean<Post> getPostById(@PathVariable Integer postId) {
+        return new ResultBean<>(postService.getPostByPostId(postId));
     }
 
     /**
@@ -83,23 +55,10 @@ public class PostController {
      * @param post        文章
      * @return result
      */
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    @ResponseBody
-    public Map<String, Object> createPost(HttpSession httpSession, @RequestBody Post post) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        logger.info(post.toString());
-        try {
-            Integer userId = ((User) httpSession.getAttribute("user")).getUserId();
-            logger.info("userId====>" + userId.toString());
-            post.setUserId(userId);
-            postService.insertPost(post);
-            map.put("errorCode", 0);
-            map.put("errorMessage", "添加成功");
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            map.put("errorCode", 9);
-            map.put("errorMessage", "服务器错误");
-        }
-        return map;
+    @PostMapping
+    public ResultBean<Boolean> createPost(HttpSession httpSession, @RequestBody Post post) {
+        Integer userId = ((User) httpSession.getAttribute("user")).getUserId();
+        post.setUserId(userId);
+        return new ResultBean<>(postService.insertPost(post));
     }
 }

@@ -10,10 +10,10 @@ import top.slipkinem.admin.po.TableDataExample;
 import top.slipkinem.admin.service.TableService;
 import top.slipkinem.common.beans.PageBean;
 
+import java.util.List;
+
 import static top.slipkinem.common.utils.CheckUtil.check;
 import static top.slipkinem.common.utils.CheckUtil.notNull;
-
-import java.util.List;
 
 /**
  * Created by slipkinem on 2017/4/5.
@@ -37,6 +37,9 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public Boolean deleteTable(Integer id) {
+        notNull(id, "param.is.null");
+        check(id < Integer.MAX_VALUE, "id.error");
+
         return tabledataMapper.deleteByPrimaryKey(id) > 0;
     }
 

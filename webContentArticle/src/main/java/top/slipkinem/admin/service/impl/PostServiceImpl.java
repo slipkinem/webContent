@@ -1,5 +1,7 @@
 package top.slipkinem.admin.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import top.slipkinem.admin.mapper.PostMapper;
 import top.slipkinem.admin.po.Post;
 import top.slipkinem.admin.po.PostExample;
@@ -8,10 +10,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.slipkinem.common.beans.PageBean;
+import top.slipkinem.common.utils.CheckUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import static top.slipkinem.common.utils.CheckUtil.notNull;
 
 /**
  * Created by slipkinem on 5/19/2017.
@@ -23,35 +29,34 @@ public class PostServiceImpl implements PostService {
     private PostMapper postMapper;
 
     @Override
-    public Integer insertPost(Post post) {
-        Date date = new Date();
-        post.setCreateTime(date);
-        Integer code = postMapper.insertSelective(post);
-        return code;
+    public Boolean insertPost(Post post) {
+        notNull(post, "param.is.null");
+        post.setCreateTime(new Date());
+        return postMapper.insertSelective(post) > 0;
     }
 
     @Override
-    public List<Post> getPostsByUserId(Integer UserId) {
-        List<Post> list = new ArrayList<Post>();
+    public PageBean<Post> getPostsByUserId(Integer userId, Integer pageNum, Integer pageSize) {
+        notNull(userId, "param.is.null");
+        notNull(pageNum, "param.is.null");
+        notNull(pageSize, "param.is.null");
+
+        PageHelper.startPage(pageNum, pageSize);
         PostExample postExample = new PostExample();
-        postExample.createCriteria().andUserIdEqualTo(UserId);
-        try {
-            list = postMapper.selectByExampleWithBLOBs(postExample);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-        }
-        return list;
+        postExample.createCriteria().andUserIdEqualTo(userId);
+
+        List<Post> list = postMapper.selectByExampleWithBLOBs(postExample);
+        PageInfo<Post> pageInfo = new PageInfo<>(list);
+        return new PageBean<>(pageInfo);
     }
 
     @Override
     public Post getPostByPostId(Integer postId) {
-        Post post = new Post();
-        try {
-            post = postMapper.selectByPrimaryKey(postId);
-        } catch (Exception e) {
-            logger.error(e.getMessage());
-            throw new Error("数据库查询错误====> " + e.getMessage());
-        }
+        notNull(postId, "param.is.null");
+
+        Post post = postMapper.selectByPrimaryKey(postId);
+
+        notNull(postId, "param.is.null");
         return post;
     }
 }

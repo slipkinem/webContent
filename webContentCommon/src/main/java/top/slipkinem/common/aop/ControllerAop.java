@@ -19,6 +19,7 @@ public class ControllerAop {
         ResultBean<?> result;
 
         try {
+            // 执行目标方法
             result = (ResultBean<?>) joinPoint.proceed();
             Object[] args = joinPoint.getArgs();
 
@@ -33,7 +34,7 @@ public class ControllerAop {
     private ResultBean<?> handlerException(ProceedingJoinPoint joinPoint, Throwable e) {
         ResultBean<?> result = new ResultBean();
 
-        logger.error(joinPoint.getSignature() + "error ", e);
+        logger.error(joinPoint.getSignature() + " error: " + e.toString());
 
         if (e instanceof CheckException || e instanceof IllegalArgumentException) {
             result.setErrorMessage(e.getLocalizedMessage());

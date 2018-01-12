@@ -2,15 +2,14 @@ package top.slipkinem.admin.service;
 
 
 import top.slipkinem.admin.po.Post;
-
-import java.util.List;
+import top.slipkinem.common.beans.PageBean;
 
 /**
  * Created by slipkinem on 5/19/2017.
  */
 public interface PostService {
-    Integer insertPost(Post post);
-    List<Post> getPostsByUserId(Integer userId);
+    Boolean insertPost(Post post);
+    PageBean<Post> getPostsByUserId(Integer userId, Integer pageNum, Integer pageSize);
 
     Post getPostByPostId(Integer postId);
 }

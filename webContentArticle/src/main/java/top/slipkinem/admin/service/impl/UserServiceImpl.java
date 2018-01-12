@@ -8,12 +8,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import top.slipkinem.common.utils.CheckUtil;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static top.slipkinem.common.utils.CheckUtil.check;
+import static top.slipkinem.common.utils.CheckUtil.notNull;
 
 /**
  * Created by slipkinem on 2017/4/1.
@@ -77,5 +81,28 @@ public class UserServiceImpl implements UserService {
             logger.error(e.getMessage());
         }
         return username;
+    }
+
+    @Override
+    public User login(User user) {
+        notNull(user, "param.is.null");
+        // 已有的用户
+        User existUser = this.getUserByUserCode(user.getUserCode());
+        notNull(existUser, "user.error");
+        // 加密密码
+        String password = this.encryptUserPassword(user.getPassword());
+        // 检查密码是否一样
+        check(password.equals(existUser.getPassword()), "user.error");
+        return existUser;
+    }
+
+    @Override
+    public User register(User user) {
+        notNull(user, "param.is.null");
+        check(this.getUserByUserCode(user.getUserCode()) == null, "user.repeat.error");
+
+        user.setPassword(this.encryptUserPassword(user.getPassword()));
+        check(this.insertUserRecord(user) > 0, "user.register.error");
+        return user;
     }
 }

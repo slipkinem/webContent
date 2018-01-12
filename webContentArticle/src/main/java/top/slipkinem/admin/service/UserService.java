@@ -14,4 +14,8 @@ public interface UserService {
     String encryptUserPassword(String password);
 
     String getUserNameByUserId(Integer userId);
+
+    User login(User user);
+
+    User register (User user);
 }
