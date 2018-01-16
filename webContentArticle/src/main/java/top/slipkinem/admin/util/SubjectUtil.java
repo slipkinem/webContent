@@ -16,15 +16,16 @@ public class SubjectUtil {
         }
     }
 
-    public static void getSession (Object key) {
+    public static Object getSession (Object key) {
         Subject subject = SecurityUtils.getSubject();
 
         if (subject != null) {
             Session session = subject.getSession();
 
             if (session != null) {
-                session.getAttribute(key);
+                return session.getAttribute(key);
             }
         }
+        return null;
     }
 }

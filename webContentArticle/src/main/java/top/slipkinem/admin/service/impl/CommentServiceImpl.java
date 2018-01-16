@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import top.slipkinem.admin.mapper.CommentMapper;
 import top.slipkinem.admin.po.Comment;
 import top.slipkinem.admin.po.CommentExample;
+import top.slipkinem.admin.po.User;
 import top.slipkinem.admin.service.CommentService;
+import top.slipkinem.admin.util.SubjectUtil;
 
 import java.util.List;
 
@@ -40,6 +42,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Boolean insertComment(Comment comment) {
+        User user = (User) SubjectUtil.getSession("user");
+        notNull(user, "param.is.null");
+        comment.setUserId(user.getUserId());
+        comment.setUsername(user.getUsername());
         return commentMapper.insertSelective(comment) > 0;
     }
 }

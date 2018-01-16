@@ -9,7 +9,7 @@ import top.slipkinem.common.beans.PageBean;
  */
 public interface PostService {
     Boolean insertPost(Post post);
-    PageBean<Post> getPostsByUserId(Integer userId, Integer pageNum, Integer pageSize);
+    PageBean<Post> getPostsByUserId(Integer pageNum, Integer pageSize);
 
     Post getPostByPostId(Integer postId);
 }

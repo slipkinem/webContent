@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import top.slipkinem.admin.mapper.PostMapper;
 import top.slipkinem.admin.po.Post;
 import top.slipkinem.admin.po.PostExample;
+import top.slipkinem.admin.po.User;
 import top.slipkinem.admin.service.PostService;
+import top.slipkinem.admin.util.SubjectUtil;
 import top.slipkinem.common.beans.PageBean;
+import top.slipkinem.common.excepitons.UnloginException;
 
 import java.util.Date;
 import java.util.List;
@@ -25,14 +28,26 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Boolean insertPost(Post post) {
+        User user = (User) SubjectUtil.getSession("user");
+        post.setUserId(user != null ? user.getUserId() : null);
+
         notNull(post, "param.is.null");
+        notNull(post.getUserId(), "param.is.null");
+
         post.setCreateTime(new Date());
         return postMapper.insertSelective(post) > 0;
     }
 
     @Override
-    public PageBean<Post> getPostsByUserId(Integer userId, Integer pageNum, Integer pageSize) {
-        notNull(userId, "param.is.null");
+    public PageBean<Post> getPostsByUserId(Integer pageNum, Integer pageSize) {
+        User user = (User) SubjectUtil.getSession("user");
+
+        if (user == null) {
+            throw new UnloginException("登录已经过期，请重新登录");
+        }
+
+        Integer userId = user.getUserId();
+
         notNull(pageNum, "param.is.null");
         notNull(pageSize, "param.is.null");
 
