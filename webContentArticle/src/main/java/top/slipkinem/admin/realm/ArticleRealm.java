@@ -12,6 +12,7 @@ import top.slipkinem.admin.util.SubjectUtil;
 
 /**
  * Created by slipkinem on 6/21/2017.
+ * realm相当于一个登录的场所 （域）
  */
 public class ArticleRealm extends AuthorizingRealm {
     @Autowired

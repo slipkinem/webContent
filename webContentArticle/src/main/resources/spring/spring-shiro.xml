@@ -4,29 +4,98 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
   <!-- shiro配置 -->
   <!-- 自定义的realm域 -->
-  <bean id="articleRealm" class="top.slipkinem.admin.realm.ArticleRealm" />
+  <bean id="articleRealm" class="top.slipkinem.admin.realm.ArticleRealm">
+    <property name="cachingEnabled" value="true"/>
+    <property name="authorizationCacheName" value="authorizationCache"/>
+  </bean>
   <!-- shiro安全管理器 -->
   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-    <property name="realm" ref="articleRealm" />
+    <property name="realm" ref="articleRealm"/>
+    <property name="sessionManager" ref="sessionManager"/>
+    <property name="rememberMeManager" ref="rememberMeManager"/>
+    <property name="cacheManager" ref="cacheManager"/>
   </bean>
   <!-- shiro过滤器 -->
   <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
     <!-- 核心安全管理器接口，必须 -->
-    <property name="securityManager" ref="securityManager" />
+    <property name="securityManager" ref="securityManager"/>
     <!-- shiro过滤链的定义 -->
     <property name="filterChainDefinitions">
       <value>
-        /login=anon
-        /user/admin*=authc
+        /user/login = anon
+        /user/logout = anon
+        /post/** = article
+        /table/** = article
+        /comment/** = article
       </value>
     </property>
+    <!-- 过滤器 -->
+    <property name="filters">
+      <map>
+        <entry key="article" value-ref="authShiroInterceptor"/>
+      </map>
+    </property>
   </bean>
+  <!-- filter bean -->
+  <bean id="authShiroInterceptor" class="top.slipkinem.admin.interceptor.AuthShiroInterceptor"/>
   <!-- 保证实现了shiro内部lifecycle函数的bean执行 -->
-  <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
-  <!-- 开启shiro注解 -->
-  <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor" />
-  <!-- 开启spring注解 -->
-  <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-    <property name="securityManager" ref="securityManager" />
+  <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+  <!-- session管理 -->
+  <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+    <property name="globalSessionTimeout" value="1800000"/>
+    <property name="deleteInvalidSessions" value="true"/>
+    <property name="sessionValidationSchedulerEnabled" value="true"/>
+    <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+    <property name="sessionDAO" ref="sessionDAO"/>
+    <property name="sessionIdCookieEnabled" value="true"/>
+    <property name="sessionIdCookie" ref="sessionIdCookie"/>
   </bean>
+
+  <bean id="sessionValidationScheduler" class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+    <property name="sessionManager" ref="sessionManager"/>
+    <property name="sessionValidationInterval" value="1800000"/>
+  </bean>
+
+  <bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+    <property name="activeSessionsCacheName" value="activeSessionCache"/>
+    <property name="sessionIdGenerator" ref="sessionIdGenerator"/>
+  </bean>
+
+  <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+
+
+  <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <property name="name" value="articleSid"/>
+    <property name="httpOnly" value="true"/>
+    <property name="maxAge" value="2592000"/>
+  </bean>
+  <!-- /session管理 -->
+
+  <!-- rememberMe -->
+  <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+    <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}"/>
+    <property name="cookie" ref="rememberMeCookie"/>
+  </bean>
+
+  <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+    <property name="name" value="rememberMe"/>
+    <property name="httpOnly" value="true"/>
+    <property name="maxAge" value="2592000"/>
+  </bean>
+  <!-- /rememberMe -->
+
+  <!-- cacheManager -->
+  <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <property name="cacheManagerConfigFile" value="classpath:shiro/ehcache.xml"/>
+  </bean>
+
+
+  <!-- 开启shiro注解 -->
+  <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"-->
+  <!--depends-on="lifecycleBeanPostProcessor"/>-->
+  <!--&lt;!&ndash; 开启spring注解 &ndash;&gt;-->
+  <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+  <!--<property name="securityManager" ref="securityManager"/>-->
+  <!--</bean>-->
 </beans>

@@ -95,6 +95,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Boolean logout() {
+        SecurityUtils.getSubject().logout();
+        return true;
+    }
+
+    @Override
     public User register(User user) {
         notNull(user, "param.is.null");
         check(this.getUserByUserCode(user.getUserCode()) == null, "user.repeat.error");

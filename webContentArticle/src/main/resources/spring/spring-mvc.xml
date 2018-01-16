@@ -20,12 +20,12 @@
   <!--<mvc:resources mapping="/css/**" location="static" />-->
   <!--<mvc:default-servlet-handler/>-->
   <!-- 拦截器 -->
-  <mvc:interceptors>
-    <mvc:interceptor>
-      <mvc:mapping path="/api/**"/>
-      <bean class="top.slipkinem.admin.interceptor.AuthInterceptor"/>
-    </mvc:interceptor>
-  </mvc:interceptors>
+  <!--<mvc:interceptors>-->
+    <!--<mvc:interceptor>-->
+      <!--<mvc:mapping path="/**"/>-->
+      <!--<bean class="top.slipkinem.admin.interceptor.AuthInterceptor"/>-->
+    <!--</mvc:interceptor>-->
+  <!--</mvc:interceptors>-->
   <!-- 视图 -->
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
         p:prefix="/" p:suffix=".html"/>

@@ -49,6 +49,11 @@ public class UserController {
         return new ResultBean<>(userService.register(user));
     }
 
+    @GetMapping("/logout")
+    public ResultBean<Boolean> logout () {
+        return new ResultBean<>(userService.logout());
+    }
+
     /**
      * 前端获取验证码的接口
      *
