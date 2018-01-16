@@ -18,13 +18,13 @@ public class TableController {
 
     /**
      * 获取数据
-     * @param current 页码
-     * @param size 页量
+     * @param pageNum 页码
+     * @param pageSize 页量
      * @return map
      */
     @GetMapping
-    public ResultBean<PageBean<TableData>> getTable(Integer current, Integer size) {
-        return new ResultBean<>(tableService.getTableData(current, size));
+    public ResultBean<PageBean<TableData>> getTable(Integer pageNum, Integer pageSize) {
+        return new ResultBean<>(tableService.getTableData(pageNum, pageSize));
     }
 
 

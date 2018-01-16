@@ -20,6 +20,8 @@ public class ResultBean<T> implements Serializable {
 
     public static final int NO_PERMISSION = 2;
 
+    public static final int LOGIN_ERROR = 3;
+
     public static final int UNKNOWN_EXCEPTION = -99;
 
     private String errorMessage = "success";

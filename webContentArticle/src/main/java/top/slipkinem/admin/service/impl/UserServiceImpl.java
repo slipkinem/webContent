@@ -1,14 +1,16 @@
 package top.slipkinem.admin.service.impl;
 
-import top.slipkinem.admin.mapper.UserMapper;
-import top.slipkinem.admin.po.User;
-import top.slipkinem.admin.po.UserExample;
-import top.slipkinem.admin.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import top.slipkinem.common.utils.CheckUtil;
+import top.slipkinem.admin.mapper.UserMapper;
+import top.slipkinem.admin.po.User;
+import top.slipkinem.admin.po.UserExample;
+import top.slipkinem.admin.service.UserService;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -86,14 +88,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         notNull(user, "param.is.null");
-        // 已有的用户
-        User existUser = this.getUserByUserCode(user.getUserCode());
-        notNull(existUser, "user.error");
-        // 加密密码
-        String password = this.encryptUserPassword(user.getPassword());
-        // 检查密码是否一样
-        check(password.equals(existUser.getPassword()), "user.error");
-        return existUser;
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUserCode(), user.getPassword(), true);
+        Subject subject = SecurityUtils.getSubject();
+        subject.login(token);
+        return user;
     }
 
     @Override

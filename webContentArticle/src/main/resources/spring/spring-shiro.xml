@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
   <!-- shiro配置 -->
   <!-- 自定义的realm域 -->
-  <bean id="articleRealm" class="top.slipkinem.admin.realm.myRealm" />
+  <bean id="articleRealm" class="top.slipkinem.admin.realm.ArticleRealm" />
   <!-- shiro安全管理器 -->
   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
     <property name="realm" ref="articleRealm" />

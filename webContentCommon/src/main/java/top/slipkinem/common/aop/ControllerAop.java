@@ -1,5 +1,6 @@
 package top.slipkinem.common.aop;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,12 @@ public class ControllerAop {
         if (e instanceof NoPermissionException) {
             result.setErrorMessage("NO PERMISSION");
             result.setErrorCode(ResultBean.NO_PERMISSION);
+            return result;
+        }
+
+        if (e instanceof AuthenticationException) {
+            result.setErrorMessage("账号或密码错误");
+            result.setErrorCode(ResultBean.LOGIN_ERROR);
             return result;
         }
 

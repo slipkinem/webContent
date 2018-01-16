@@ -1,27 +1,25 @@
 package top.slipkinem.admin.realm;
 
-import top.slipkinem.admin.po.User;
-import top.slipkinem.admin.service.UserService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-
-import javax.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import top.slipkinem.admin.po.User;
+import top.slipkinem.admin.service.UserService;
+import top.slipkinem.admin.util.SubjectUtil;
 
 /**
  * Created by slipkinem on 6/21/2017.
  */
-public class myRealm extends AuthorizingRealm {
-    @Resource
+public class ArticleRealm extends AuthorizingRealm {
+    @Autowired
     private UserService userService;
 
     /**
      * 为当前登陆成功的用户授予权限和角色，已经登陆成功了
+     *
      * @param principalCollection 存储各个用户
      * @return 包含roleList和permissionList的对象
      */
@@ -36,6 +34,7 @@ public class myRealm extends AuthorizingRealm {
 
     /**
      * 在调用subject.login的时候，会进入，和return的info进行匹配
+     *
      * @param authenticationToken token
      * @return 要匹配的用户信息
      * @throws AuthenticationException 授权失败
@@ -44,11 +43,25 @@ public class myRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         String userCode = (String) authenticationToken.getPrincipal();
         User user = userService.getUserByUserCode(userCode);
-        if (user != null) {
-            AuthenticationInfo info = new SimpleAuthenticationInfo(user.getUserCode(), user.getPassword(), "myRealm");
-            return info;
-        } else {
-            return null;
+
+        if (user == null) {
+            throw new UnknownAccountException();
         }
+
+        String userInputPassword = new String((char[]) authenticationToken.getCredentials());
+
+        String encryptionUserInputPassword = userService.encryptUserPassword(userInputPassword);
+
+        if (!encryptionUserInputPassword.equals(user.getPassword())) {
+            throw new IncorrectCredentialsException();
+        }
+
+        String userName = user.getUsername();
+
+        AuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userCode, userInputPassword, userName);
+
+        SubjectUtil.setSession("user", user);
+
+        return authenticationInfo;
     }
 }
