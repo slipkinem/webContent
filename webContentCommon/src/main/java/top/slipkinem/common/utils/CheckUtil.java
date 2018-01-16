@@ -15,25 +15,25 @@ public class CheckUtil {
         CheckUtil.messageSource = messageSource;
     }
 
-    private static void fail(String message, Object... args) {
-        throw new CheckException(messageSource.getMessage(message, args, Locale.CHINA));
+    private static void fail(String messageCode, Object... args) {
+        throw new CheckException(messageSource.getMessage(messageCode, args, Locale.CHINA));
     }
 
-    public static void check(boolean condition, String message, Object ...args) {
+    public static void check(boolean condition, String messageCode, Object ...args) {
         if (!condition) {
-            fail(message, args);
+            fail(messageCode, args);
         }
     }
 
-    public static void notNull(Object object, String message, Object ...args) {
+    public static void notNull(Object object, String messageCode, Object ...args) {
         if (object == null) {
-            fail(message, args);
+            fail(messageCode, args);
         }
     }
 
-    public static void notEmpty(String string, String message, Object ...args) {
+    public static void notEmpty(String string, String messageCode, Object ...args) {
         if (string == null || string.isEmpty()) {
-            fail(message, args);
+            fail(messageCode, args);
         }
     }
 }
