@@ -110,6 +110,23 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.tomcat.maven</groupId>
+        <artifactId>tomcat7-maven-plugin</artifactId>
+        <version>2.2</version>
+        <configuration>
+          <uriEncoding>UTF-8</uriEncoding>
+          <url>http://localhost:8085/manager/text</url>
+          <server>tomcat7</server>
+          <path>/${project.artifactId}</path>
+          <update>true</update>
+          <username>admin</username>
+          <password>123456</password>
+          <contextReloadable>true</contextReloadable>
+        </configuration>
+      </plugin>
+
     </plugins>
 
   </build>
