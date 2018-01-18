@@ -507,4 +507,8 @@ public class UserController {
 13. **用npm下载vue-cli**
   * 用vue-cli生成webpack项目骨架
   * npm install 下载所有依赖
-14. 
+```bash
+  npm run dev
+```
+
+## Docker 部署流程

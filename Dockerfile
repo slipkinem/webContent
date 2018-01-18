@@ -1,0 +1,16 @@
+FROM tomcat:7.0.77-jre8
+
+MAINTAINER Slipkinem <slipkinem@gmail.com>
+
+ENV WORK_PATH /usr/local/tomcat/conf
+
+ENV USER_CONF_FILE_NAME tomcat-users.xml
+
+ENV SERVER_CONF_FILE_NAME server.xml
+
+RUN rm $WORK_PATH/$USER_CONF_FILE_NAME
+COPY ./$USER_CONF_FILE_NAME $WORK_PATH/
+
+RUN rm $WORK_PATH/$SERVER_CONF_FILE_NAME
+
+COPY ./$SERVER_CONF_FILE_NAME $WORK_PATH/
