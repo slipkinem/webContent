@@ -5,6 +5,7 @@
     <build>
         <finalName>article</finalName>
     
+    
         <resources>
           <resource>
             <directory>src/main/java</directory>

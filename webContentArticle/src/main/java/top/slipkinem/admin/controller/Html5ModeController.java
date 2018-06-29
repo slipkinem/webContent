@@ -1,5 +1,5 @@
-/**
- * Created by slipkinem on 8/25/2017 at 10:02 AM.
+/*
+  Created by slipkinem on 8/25/2017 at 10:02 AM.
  */
 
 package top.slipkinem.admin.controller;
